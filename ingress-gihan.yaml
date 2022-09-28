@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gihan-testsimple
+  name: test-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gihan-testsimple
+      app: test-service
   template:
     metadata:
       labels:
-        app: gihan-testsimple
+        app: test-service
     spec:
       containers:
-      - name: gihan-testsimple
-        image: 504546234530.dkr.ecr.ap-southeast-2.amazonaws.com/buysmartdotcom/test-service:0e249af-20220928_045134
+      - name: test-service
+        image: https://hub.docker.com/layers/bhawantha96/codeobe-test-service/1.0.0/images/sha256-b3346c023e3aabd05457d0e0ad5e05daa9ce18c368ea6c3eb3cddeb67c2b7519?context=repo
         ports:
         - containerPort: 8081
         env:
         - name: TITLE
-          value: "AKS GIHAN TestSimple"
+          value: "AKS TestSimple"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: gihan-testsimple
+  name: test-service
 spec:
   type: ClusterIP
   ports:
   - port: 8081
   selector:
-    app: gihan-testsimple
+    app: test-service
